@@ -9,8 +9,12 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
     private TextView textView;
     private static final String TAG = "MainActivity";
     private SensorManager sensorManager;
@@ -21,12 +25,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
 
-        Log.d(TAG, "onCreate: Initializing Sensor Services");
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.d(TAG, "onCreate: Registered accelerometer listener");
+        Button accelerometerButton = findViewById(R.id.button1);
+        accelerometerButton.setOnClickListener(this);
+
     }
 
 
@@ -39,5 +40,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button1:
+                sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+                accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+                sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+                break;
+        }
     }
 }
