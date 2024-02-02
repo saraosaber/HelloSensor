@@ -71,12 +71,12 @@ public class BallBalanceActivity extends AppCompatActivity implements SensorEven
         } else if (newX > width - 150) {
             imageView.setX(width - 150);
         }
-        if (newY > 0 && newY < height - 350) {
+        if (newY > 0 && newY < height - 200) {
             imageView.setY(newY);
         }else if(newY < 0){
             imageView.setY(0);
-        } else if (newY > height - 350) {
-            imageView.setY(height - 350);
+        } else if (newY > height - 200) {
+            imageView.setY(height - 200);
         }
         //om den kolliderar
         if (fishRect.intersect(knifeRect)) {
@@ -95,12 +95,12 @@ public class BallBalanceActivity extends AppCompatActivity implements SensorEven
     }
     public float getRandomHeight(){
         float min = 50;
-        float max = height - 300;
+        float max = height - 350;
         return (float) (Math.random() * (max - min)) + min;
     }
     public float getRandomWidth(){
         float min = 50;
-        float max = width - 300;
+        float max = width - 350;
         return (float) (Math.random() * (max - min)) + min;
     }
     public void moveBubble() {
@@ -115,7 +115,7 @@ public class BallBalanceActivity extends AppCompatActivity implements SensorEven
         bubbleImageView.setX(newX);
     }
     public boolean isInProximity(float newX, float newY){
-       if(abs(imageView.getX() - newX) < 300 && abs(imageView.getY() - newY) < 300) {
+       if(abs(imageView.getX() - newX) < 350 && abs(imageView.getY() - newY) < 350) {
            return true;
        }else {
            return false;
